@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FM27 Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/*@include css/styles.css*/
+</style>
+</head>
+<body>
+<header>
+  <h1 title="FM27 Explorer v{{VERSION}}">FM27 Explorer</h1>
+  <label class="savepick">Save <select id="saveSel"></select></label>
+  <div class="meta" id="meta"></div>
+  <button class="btn" id="btnImport">Importar save</button>
+  <button class="btn" id="btnDel" title="Apagar este save da aplicação">Apagar</button>
+  <input type="file" id="fileIn" accept=".fm" hidden>
+  <nav>
+    <button id="tabP" class="on">Jogadores</button>
+    <button id="tabC">Clubes</button>
+    <button id="tabT">Tática</button>
+  </nav>
+  <label class="savepick" title="Esconde CA/PA, atributos ocultos e personalidade, como no jogo"><input type="checkbox" id="realMode"> Modo realista</label>
+  <div class="langsw" id="langSw" title="Language / Idioma"><button data-l="en">EN</button><button data-l="pt">PT</button></div>
+</header>
+<main>
+  <div id="loading" class="loading">A carregar dados do save…</div>
+
+  <section id="viewP" hidden>
+    <div class="filters">
+      <label>Nome<input id="fName" class="wide" placeholder="ex.: Bruno Fernandes"></label>
+      <label>Posição<select id="fPos"></select></label>
+      <label>Idade mín.<input id="fAgeMin" type="number" min="14" max="45"></label>
+      <label>Idade máx.<input id="fAgeMax" type="number" min="14" max="45"></label>
+      <label class="secret">CA mín.<input id="fCa" type="number" min="0" max="200"></label>
+      <label class="secret">PA mín.<input id="fPa" type="number" min="0" max="200"></label>
+      <label>Nacionalidade<select id="fNat"></select></label>
+      <label>Clube<input id="fClub" placeholder="ex.: FC Porto"></label>
+      <label>Valor máx. (M€)<input id="fVal" type="number" min="0" step="1"></label>
+      <label class="chk"><input type="checkbox" id="fFree"> Só sem clube</label>
+      <button class="btn" id="btnReset">Limpar</button>
+      <button class="btn" id="btnCsv">Exportar CSV</button>
+    </div>
+    <div class="count" id="countP"></div>
+    <table><thead id="headP"></thead><tbody id="bodyP"></tbody></table>
+  </section>
+
+  <section id="viewT" hidden></section>
+
+  <section id="viewC" hidden>
+    <div id="clubList">
+      <div class="filters">
+        <label>Clube<input id="cName" class="wide" placeholder="ex.: Sporting"></label>
+        <label>País<select id="cNat"></select></label>
+      </div>
+      <div class="count" id="countC"></div>
+      <table><thead><tr><th>Clube</th><th>País</th><th class="num">Reputação</th><th class="num">Jogadores</th><th class="num secret">CA médio (top 11)</th></tr></thead><tbody id="bodyC"></tbody></table>
+    </div>
+    <div id="clubView" hidden></div>
+  </section>
+</main>
+
+<footer class="credits">
+  <span data-lang="en">Save reading by <a href="https://github.com/rhiever/fmsave" target="_blank" rel="noopener">fmsave</a>, by Randal S. Olson (open source, MIT) — this app would not exist without it.
+  · Python in the browser with <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a>
+  · FM27 Explorer v{{VERSION}} by Tiago Louro · Not affiliated with Sports Interactive.</span>
+  <span data-lang="pt">Leitura dos saves com <a href="https://github.com/rhiever/fmsave" target="_blank" rel="noopener">fmsave</a>, de Randal S. Olson (open source, MIT) — sem ele esta app não existia.
+  · Python no browser com <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a>
+  · FM27 Explorer v{{VERSION}} por Tiago Louro · Não afiliado à Sports Interactive.</span>
+</footer>
+
+<div class="overlay" id="ov"><div class="card" id="card"></div></div>
+
+<script type="text/plain" id="pycode">
+#@include py/convert.py
+</script>
+<script>
+/*@include js/i18n.js*/
+/*@include js/boot.js*/
+/*@include js/app.js*/
+</script>
+</body>
+</html>

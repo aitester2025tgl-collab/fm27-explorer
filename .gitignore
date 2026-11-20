@@ -1,0 +1,16 @@
+# build output (FM27-Explorer.html IS committed)
+dist/
+site/
+
+# Football Manager saves and tactics never belong in the repo
+*.fm
+*.fmf
+
+# Python / editors / OS
+__pycache__/
+.pytest_cache/
+.venv/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
